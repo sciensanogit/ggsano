@@ -13,13 +13,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ggsano
+# GGSANO
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/sciensanogit/ggsano/workflows/R-CMD-check/badge.svg)](https://github.com/sciensanogit/ggsano/actions)
 <!-- badges: end -->
 
-The goal of ggsano is to ...
+The goal of ggsano is to standardize and implement the Sciensano housestyle within R.
+The ggsano package currently provides three categories of important functions: sciensano_style, sciensano_colours and sciensano_templates. The sciensano_style functions can handle a ggplot2-object and recompile it according to the Sciensano house style. The sciensano_colours functions return the Sciensano house style colours in HEX format ('#XXXXXX'). Both discrete and continuous scales are available.
 
 ## Installation
 
@@ -30,27 +31,103 @@ You can install the development version of ggsano from [GitHub](https://github.c
 devtools::install_github("sciensanogit/ggsano")
 ```
 
-## Example
+The package can be loaded by:
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+```{r}
 library(ggsano)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Using the functions
 
-```{r cars}
-summary(cars)
+### Colors
+The package has two palettes-functions available: `pal_sciensano()` for discrete colors, and `pal_sciensano_c()` for continuous colors.
+
+For the color palette `pal_sciensano`, there are two options available: `default` and `contrast`.
+
+```{r}
+scales::show_col(pal_sciensano(palette = "default")(14), labels = FALSE)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = FALSE)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+Hereafter an example is given using public available data. The pallete can be used to color and fill a graph based on discrete scale
+
+```{r}
+library("ggplot2")
+library("reshape2")
+library("cowplot")
+
+data("mtcars")
+data("diamonds")
+
+ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "loess", alpha = 0.1, size = 1, span = 1) +
+  theme_bw() + scale_color_sciensano(palette = "contrast")
+
+ggplot(
+  subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
+  aes(x = depth, fill = cut)
+) +
+  geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
+  theme_bw() + scale_fill_sciensano(palette = "contrast")
+```
+
+The palette can also be used with a continuous scale.
+
+```{r}
+cor <- abs(cor(mtcars))
+cor_melt <- melt(cor)
+
+p1 <- ggplot(
+  cor_melt,
+  aes(x = Var1, y = Var2, fill = value)
+) +
+  geom_tile(colour = "black", size = 0.3) +
+  theme_bw() + scale_fill_sciensano_c(palette = "red-yellow-green")
+
+p2 <- ggplot(
+  cor_melt,
+  aes(x = Var1, y = Var2, fill = value)
+) +
+  geom_tile(colour = "black", size = 0.3) +
+  theme_bw() + scale_fill_sciensano_c(palette = "green")
+
+p3 <- ggplot(
+  cor_melt,
+  aes(x = Var1, y = Var2, fill = value)
+) +
+  geom_tile(colour = "black", size = 0.3) +
+  theme_bw() + scale_fill_sciensano_c(palette = "red")
+
+cowplot::plot_grid(p1, p2, p3)
+```
+
+### Finalizing plots
+
+`finalise_plot`: will save out your plot with the correct guidelines for publication for a Sciensano graphic. It is made up of functions that will left align your title, subtitle and source, add the Sciensano blocks at the bottom right and save it to your specified location. The function has six arguments, three of which need to be explicitly set and three that are defaults unless you overwrite them.
+
+Here are the function arguments: `finalise_plot(plot_name, source_name, save_filepath, width_pixels, height_pixels, logo_image_path)`
+
+* `plot_name`: the variable name that you have called your plot.
+* `source_name`: the source text that you want to appear at the bottom left corner of your plot. You will need to type the word `"Source:"` before it, just the source, so for example `source = "Source: ONS"` would be the right way to do that.
+* `save_filepath`: the precise filepath that you want your graphic to save to, including the `.png` extension at the end. This does depend on your working directory and if you are in a specific R project. An example of a relative filepath would be: `/charts/line_chart.png`.
+* `width_pixels`: this is set to 640px by default, so only call this argument and specify the width you want your chart to be.
+* `height_pixels`: this is set to 450px by default, so only call this argument and specify the height you want your chart to be.
+* `logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
+
+```{r}
+
+finalise_plot(plot_name = p1,
+source = "Source: XX",
+save_filepath = "filename_that_my_plot_should_be_saved_to-nc.png",
+logo_image_path = "inst/extdata/logo.png",
+width_pixels = 640,
+height_pixels = 550)
+```
+

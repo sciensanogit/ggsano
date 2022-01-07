@@ -20,8 +20,6 @@
 #' show_col(pal_sciensano("default", alpha = 0.6)(10))}
 pal_sciensano <- function(palette = c("default", "contrast"), alpha = 1) {
   palette <- match.arg(palette)
-
-  if (!(palette %in% c("default", "contrast"))) stop("palette should be one of the following: default, contrast")
   if (alpha > 1L | alpha <= 0L) stop("alpha must be in (0, 1]")
 
   raw_cols <- sciensano_col_d[[palette]]
