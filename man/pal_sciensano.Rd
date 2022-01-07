@@ -2,13 +2,14 @@
 % Please edit documentation in R/colors-and-helpers.R
 \name{pal_sciensano}
 \alias{pal_sciensano}
-\title{Sciensano Color Palettes}
+\title{Sciensano Discrete Color Palettes}
 \usage{
-pal_sciensano(palette = c("default"), alpha = 1)
+pal_sciensano(palette = c("default", "contrast"), alpha = 1)
 }
 \arguments{
 \item{palette}{Palette type.
-Currently there is one available option: \code{"default"}
+Currently there are two available option:
+\code{"default", "contrast"} containing all or a subset of the palette
 (14-color palette inspired by \emph{Sciensano}).}
 
 \item{alpha}{Transparency level, a real number in (0, 1].
@@ -18,7 +19,7 @@ See \code{alpha} in \code{\link[grDevices]{rgb}} for details.}
 Color palettes inspired by housestyle of Sciensano \url{https://intranet.sciensano.be/nl/DienstenAlgemeenDirecteur/Communicatie/Pages/Huisstijl-en-templates.aspx}.
 }
 \examples{
-library("scales")
+\dontrun{library("scales")
 show_col(pal_sciensano("default")(10))
-show_col(pal_sciensano("default", alpha = 0.6)(10))
+show_col(pal_sciensano("default", alpha = 0.6)(10))}
 }

@@ -6,15 +6,16 @@
 \alias{scale_fill_sciensano}
 \title{Sciensano Color Color Scales}
 \usage{
-scale_color_sciensano(palette = c("default"), alpha = 1, ...)
+scale_color_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
 
-scale_colour_sciensano(palette = c("default"), alpha = 1, ...)
+scale_colour_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
 
-scale_fill_sciensano(palette = c("default"), alpha = 1, ...)
+scale_fill_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
 }
 \arguments{
 \item{palette}{Palette type.
-Currently there is one available option: \code{"default"}
+Currently there are two available option:
+\code{"default", "contrast"} containing all or a subset of the palette
 (14-color palette inspired by \emph{Sciensano}).}
 
 \item{alpha}{Transparency level, a real number in (0, 1].
