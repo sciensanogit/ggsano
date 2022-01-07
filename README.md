@@ -4,6 +4,8 @@
 # ggsano
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/sciensanogit/ggsano/workflows/R-CMD-check/badge.svg)](https://github.com/sciensanogit/ggsano/actions)
 <!-- badges: end -->
 
 The goal of ggsano is to …
