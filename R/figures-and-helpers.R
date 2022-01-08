@@ -1,29 +1,3 @@
-# HELPER FX
-save_plot <- function (plot_grid, width, height, save_filepath) {
-  grid::grid.draw(plot_grid)
-  #save it
-  ggplot2::ggsave(filename = save_filepath,
-                  plot=plot_grid, width=(width/72), height=(height/72),  bg="white")
-}
-
-#Left align text
-left_align <- function(plot_name, pieces){
-  grob <- ggplot2::ggplotGrob(plot_name)
-  n <- length(pieces)
-  grob$layout$l[grob$layout$name %in% pieces] <- 2
-  return(grob)
-}
-
-create_footer <- function (source_name, logo_image_path) {
-  #Make the footer
-  footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
-                           grid::textGrob(source_name,
-                                          x = 0.004, hjust = 0, gp = grid::gpar(fontsize=16)),
-                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.944))
-  return(footer)
-
-}
-
 #' Add sciensano theme to ggplot chart
 #'
 #' This function allows you to add the sciencsano theme to your ggplotgraphics.
@@ -67,7 +41,6 @@ sciensano_style <- function(font = "Arial") {
     legend.text = ggplot2::element_text(family=font,
                                         size=18,
                                         color="black"),
-
     #Axis format
     #This sets the text font, size and colour for the axis test, as well as setting the margins and removes lines and ticks. In some cases, axis lines and axis ticks are things we would want to have in the chart - the cookbook shows examples of how to do so.
     axis.title = ggplot2::element_blank(),
@@ -100,7 +73,7 @@ sciensano_style <- function(font = "Arial") {
 #' It will left align your title, subtitle and source, add the Sciensano blocks at the bottom right and save it to your specified location.
 #' @param plot_name The variable name of the plot you have created that you want to format and save
 #' @param source_name The text you want to come after the text 'Source:' in the bottom left hand side of your side
-#' @param save_filepath Exact filepath that you want the plot to be saved to
+#' @param save_filepath Exact filepath that you want the plot to be saved to (DEFAULT: set to \code{FALSE} if you do not want to save plot)
 #' @param width_pixels Width in pixels that you want to save your chart to - defaults to 640
 #' @param height_pixels Height in pixels that you want to save your chart to - defaults to 450
 #' @param logo_image_path File path for the logo image you want to use in the right hand side of your chart,
@@ -120,7 +93,7 @@ sciensano_style <- function(font = "Arial") {
 #' @export
 finalise_plot <- function(plot_name,
                           source_name,
-                          save_filepath=file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
+                          save_filepath=FALSE,
                           width_pixels=640,
                           height_pixels=450,
                           logo_image_path = file.path(system.file("inst/extdata", package = 'ggsano'),"logo.png")) {
@@ -131,11 +104,41 @@ finalise_plot <- function(plot_name,
   plot_left_aligned <- left_align(plot_name, c("subtitle", "title", "caption"))
   plot_grid <- ggpubr::ggarrange(plot_left_aligned, footer,
                                  ncol = 1, nrow = 2,
-                                 heights = c(1, 0.045/(height_pixels/450)))
-  ## print(paste("Saving to", save_filepath))
-  save_plot(plot_grid, width_pixels, height_pixels, save_filepath)
+                                 heights = c(1, 0.08/(height_pixels/450)))
+  ## saving the plot
+  if (save_filepath != FALSE) {
+    message(paste("Saving to ", save_filepath))
+    save_plot(plot_grid, width_pixels, height_pixels, save_filepath)
+  }
+
   ## Return (invisibly) a copy of the graph. Can be assigned to a
   ## variable or silently ignored.
   invisible(plot_grid)
 }
 
+
+### HELPER FX
+save_plot <- function (plot_grid, width, height, save_filepath) {
+  grid::grid.draw(plot_grid)
+  #save it
+  ggplot2::ggsave(filename = save_filepath,
+                  plot=plot_grid, width=(width/72), height=(height/72),  bg="white")
+}
+
+#Left align text
+left_align <- function(plot_name, pieces){
+  grob <- ggplot2::ggplotGrob(plot_name)
+  n <- length(pieces)
+  grob$layout$l[grob$layout$name %in% pieces] <- 2
+  return(grob)
+}
+
+create_footer <- function (source_name, logo_image_path) {
+  #Make the footer
+  footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
+                           grid::textGrob(source_name,
+                                          x = 0.004, hjust = 0, gp = grid::gpar(fontsize=16)),
+                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.944))
+  return(footer)
+
+}

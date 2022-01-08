@@ -4,10 +4,11 @@
 #'
 #' @param palette Palette type.
 #' Currently there are two available option:
-#' \code{"default", "contrast"} containing all or a subset of the palette
+#' \code{"default", "contrast", "GnRd", "PuBl"} containing all or a subset of the palette
 #' (14-color palette inspired by \emph{Sciensano}).
 #' @param alpha Transparency level, a real number in (0, 1].
 #' See \code{alpha} in \code{\link[grDevices]{rgb}} for details.
+#' @param reverse Logical. Should the order of the colors be reversed?
 #'
 #' @export pal_sciensano
 #'
@@ -18,7 +19,8 @@
 #' \dontrun{library("scales")
 #' show_col(pal_sciensano("default")(10))
 #' show_col(pal_sciensano("default", alpha = 0.6)(10))}
-pal_sciensano <- function(palette = c("default", "contrast"), alpha = 1) {
+pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+                          alpha = 1, reverse = FALSE) {
   palette <- match.arg(palette)
   if (alpha > 1L | alpha <= 0L) stop("alpha must be in (0, 1]")
 
@@ -29,6 +31,8 @@ pal_sciensano <- function(palette = c("default", "contrast"), alpha = 1) {
     alpha = alpha * 255L, names = names(raw_cols),
     maxColorValue = 255L
   )
+
+  if (reverse) alpha_cols <- rev(alpha_cols)
 
   scales::manual_pal(unname(alpha_cols))
 }
@@ -65,9 +69,10 @@ pal_sciensano <- function(palette = c("default", "contrast"), alpha = 1) {
 #'   geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
 #'   theme_bw() + scale_fill_sciensano()}
 
-scale_color_sciensano <- function(palette = c("default", "contrast"), alpha = 1, ...) {
+scale_color_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+                                  alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
-  discrete_scale("colour", "sciensano", pal_sciensano(palette, alpha), ...)
+  discrete_scale("colour", "sciensano", pal_sciensano(palette, alpha, reverse), ...)
 }
 
 #' @export scale_colour_sciensano
@@ -77,9 +82,10 @@ scale_colour_sciensano <- scale_color_sciensano
 #' @export scale_fill_sciensano
 #' @importFrom ggplot2 discrete_scale
 #' @rdname scale_sciensano
-scale_fill_sciensano <- function(palette = c("default", "contrast"), alpha = 1, ...) {
+scale_fill_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+                                 alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
-  discrete_scale("fill", "sciensano", pal_sciensano(palette, alpha), ...)
+  discrete_scale("fill", "sciensano", pal_sciensano(palette, alpha, reverse), ...)
 }
 
 #' Sciensano Continuous Color Palettes

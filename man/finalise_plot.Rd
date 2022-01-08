@@ -7,7 +7,7 @@
 finalise_plot(
   plot_name,
   source_name,
-  save_filepath = file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
+  save_filepath = FALSE,
   width_pixels = 640,
   height_pixels = 450,
   logo_image_path = file.path(system.file("inst/extdata", package = "ggsano"),
@@ -19,7 +19,7 @@ finalise_plot(
 
 \item{source_name}{The text you want to come after the text 'Source:' in the bottom left hand side of your side}
 
-\item{save_filepath}{Exact filepath that you want the plot to be saved to}
+\item{save_filepath}{Exact filepath that you want the plot to be saved to (DEFAULT: set to \code{FALSE} if you do not want to save plot)}
 
 \item{width_pixels}{Width in pixels that you want to save your chart to - defaults to 640}
 

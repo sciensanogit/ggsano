@@ -6,20 +6,37 @@
 \alias{scale_fill_sciensano}
 \title{Sciensano Color Color Scales}
 \usage{
-scale_color_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
+scale_color_sciensano(
+  palette = c("default", "contrast", "GnRd", "PuBl"),
+  alpha = 1,
+  reverse = FALSE,
+  ...
+)
 
-scale_colour_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
+scale_colour_sciensano(
+  palette = c("default", "contrast", "GnRd", "PuBl"),
+  alpha = 1,
+  reverse = FALSE,
+  ...
+)
 
-scale_fill_sciensano(palette = c("default", "contrast"), alpha = 1, ...)
+scale_fill_sciensano(
+  palette = c("default", "contrast", "GnRd", "PuBl"),
+  alpha = 1,
+  reverse = FALSE,
+  ...
+)
 }
 \arguments{
 \item{palette}{Palette type.
 Currently there are two available option:
-\code{"default", "contrast"} containing all or a subset of the palette
+\code{"default", "contrast", "GnRd", "PuBl"} containing all or a subset of the palette
 (14-color palette inspired by \emph{Sciensano}).}
 
 \item{alpha}{Transparency level, a real number in (0, 1].
 See \code{alpha} in \code{\link[grDevices]{rgb}} for details.}
+
+\item{reverse}{Logical. Should the order of the colors be reversed?}
 
 \item{...}{additional parameters for \code{\link[ggplot2]{discrete_scale}}}
 }

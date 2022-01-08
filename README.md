@@ -10,12 +10,12 @@
 
 The goal of ggsano is to standardize and implement the Sciensano
 housestyle within R. The ggsano package currently provides three
-categories of important functions: sciensano_style, sciensano_colours
-and sciensano_templates. The sciensano_style functions can handle a
+categories of important functions: sciensano\_style, sciensano\_colours
+and sciensano\_templates. The sciensano\_style functions can handle a
 ggplot2-object and recompile it according to the Sciensano house style.
-The sciensano_colours functions return the Sciensano house style colours
-in HEX format (‘#XXXXXX’). Both discrete and continuous scales are
-available.
+The sciensano\_colours functions return the Sciensano house style
+colours in HEX format (‘\#XXXXXX’). Both discrete and continuous scales
+are available.
 
 ## Installation
 
@@ -31,6 +31,14 @@ The package can be loaded by:
 
 ``` r
 library(ggsano)
+#> Scanning ttf files in C:\WINDOWS\Fonts ...
+#> Extracting .afm files from .ttf files...
+#> C:\Windows\Fonts\arial.ttf : ArialMT already registered in fonts database. Skipping.
+#> C:\Windows\Fonts\arialbd.ttf : Arial-BoldMT already registered in fonts database. Skipping.
+#> C:\Windows\Fonts\arialbi.ttf : Arial-BoldItalicMT already registered in fonts database. Skipping.
+#> C:\Windows\Fonts\ariali.ttf : Arial-ItalicMT already registered in fonts database. Skipping.
+#> Found FontName for 0 fonts.
+#> Scanning afm files in C:/Users/RoDe1798/Documents/R-4.0.2/library/extrafontdb/metrics
 ```
 
 ## Using the functions
@@ -40,28 +48,50 @@ library(ggsano)
 The package has two palettes-functions available: `pal_sciensano()` for
 discrete colors, and `pal_sciensano_c()` for continuous colors.
 
-For the color palette `pal_sciensano`, there are two options available:
-`default` and `contrast`.
+For the color palette `pal_sciensano`, there are four options available:
+`default`, `contrast`, `GnRd`, and `PuBl`. The colors and HEX-codes are
+as follows:
+
+**DEFAULT**
 
 ``` r
-scales::show_col(pal_sciensano(palette = "default")(14), labels = FALSE)
+scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
+**CONTRAST**
+
 ``` r
-scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = FALSE)
+scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-Hereafter an example is given using public available data. The pallete
-can be used to color and fill a graph based on discrete scale
+**GnRd**
+
+``` r
+scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+**PuBl**
+
+``` r
+scales::show_col(pal_sciensano(palette = "PuBl")(6),  labels = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+Using the palette for a discrete scale:
 
 ``` r
 library("ggplot2")
+#> Warning: package 'ggplot2' was built under R version 4.0.5
 library("reshape2")
 library("cowplot")
+#> Warning: package 'cowplot' was built under R version 4.0.5
 
 data("mtcars")
 data("diamonds")
@@ -72,11 +102,11 @@ ggplot(
 ) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "loess", alpha = 0.1, size = 1, span = 1) +
-  theme_bw() + scale_color_sciensano(palette = "contrast")
+  theme_bw() + scale_color_sciensano(palette = "GnRd", reverse = TRUE)
 #> `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ``` r
 ggplot(
@@ -84,12 +114,12 @@ ggplot(
   aes(x = depth, fill = cut)
 ) +
   geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
-  theme_bw() + scale_fill_sciensano(palette = "contrast")
+  theme_bw() + scale_fill_sciensano(palette = "GnRd", reverse = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-2.png" width="100%" />
 
-The palette can also be used with a continuous scale.
+Using the palette for a continuous scale:
 
 ``` r
 cor <- abs(cor(mtcars))
@@ -119,19 +149,32 @@ p3 <- ggplot(
 cowplot::plot_grid(p1, p2, p3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" /> ###
-sciensano style
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+
+### sciensano style
 
 `sciensano_style()`: has no arguments and is added to the ggplot chain
-after you have created a plot. What it does is generally makes text
-size, font and colour, axis lines, axis text and many other standard
-chart components into Sciensano style.
+after you have created a plot. It will change the text-size, font, and
+lay-out of the graph into a dedicated Sciensano theme.
 
 ``` r
-p1+sciensano_style()
+p1 +
+  sciensano_style() + ## Default font is Arial.
+  theme(legend.key.width = ggplot2::unit(2.5, "cm")) ## extend the legend
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+
+``` r
+ggplot(
+  subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
+  aes(x = depth, fill = cut)) +
+  geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
+  theme_bw() + scale_fill_sciensano(palette = "GnRd", reverse = TRUE) +
+  sciensano_style()
+```
+
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 ### Finalizing plots
 
@@ -167,12 +210,11 @@ Here are the function arguments:
     prepared with a wide and thin image in mind.
 
 ``` r
-finalise_plot(plot_name = p1,
-source = "Source: XX",
-save_filepath = "filename_that_my_plot_should_be_saved_to-nc.png",
-logo_image_path = "inst/extdata/logo.png",
-width_pixels = 640,
-height_pixels = 550)
+finalise_plot(
+  plot_name = p1,
+  source = "Source: XX",
+  logo_image_path = "inst/extdata/logo.png",
+  width_pixels = 640,
+  height_pixels = 550
+)
 ```
-
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
