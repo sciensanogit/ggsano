@@ -158,10 +158,12 @@ Here are the function arguments: `finalise_plot(plot_name, source_name, save_fil
 * `height_pixels`: this is set to 450px by default, so only call this argument and specify the height you want your chart to be.
 * `logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
 
-```{r}
+```{r example}
 final_plot <- finalise_plot(
   plot_name = p1 + 
-    ggtitle("Example plot of mtcars", subtitle = "correlations"),
+    sciensano_style() +
+    ggtitle("Example plot of mtcars", subtitle = "correlations") +
+    theme(legend.key.width = ggplot2::unit(2.5, "cm")),
   source = "Source: mtcars",
   logo_image_path = "inst/extdata/logo.png",
   width_pixels = 640,

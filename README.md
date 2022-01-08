@@ -212,7 +212,9 @@ Here are the function arguments:
 ``` r
 final_plot <- finalise_plot(
   plot_name = p1 + 
-    ggtitle("Example plot of mtcars", subtitle = "correlations"),
+    sciensano_style() +
+    ggtitle("Example plot of mtcars", subtitle = "correlations") +
+    theme(legend.key.width = ggplot2::unit(2.5, "cm")),
   source = "Source: mtcars",
   logo_image_path = "inst/extdata/logo.png",
   width_pixels = 640,
@@ -222,4 +224,4 @@ final_plot <- finalise_plot(
 final_plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="100%" />
