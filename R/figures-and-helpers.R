@@ -16,6 +16,9 @@ sciensano_style <- function(font = "Arial") {
     stop("Please specify an available font")
   }
 
+  ## build on theme_bw
+
+  ggplot2::theme_bw() %+replace%
   ggplot2::theme(
 
     #Text format:
@@ -104,7 +107,7 @@ finalise_plot <- function(plot_name,
   plot_left_aligned <- left_align(plot_name, c("subtitle", "title", "caption"))
   plot_grid <- ggpubr::ggarrange(plot_left_aligned, footer,
                                  ncol = 1, nrow = 2,
-                                 heights = c(1, 0.08/(height_pixels/450)))
+                                 heights = c(1, 0.10/(height_pixels/450)))
   ## saving the plot
   if (save_filepath != FALSE) {
     message(paste("Saving to ", save_filepath))
@@ -138,7 +141,7 @@ create_footer <- function (source_name, logo_image_path) {
   footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
                            grid::textGrob(source_name,
                                           x = 0.004, hjust = 0, gp = grid::gpar(fontsize=16)),
-                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.944))
+                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.925))
   return(footer)
 
 }

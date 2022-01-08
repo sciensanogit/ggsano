@@ -210,11 +210,16 @@ Here are the function arguments:
     prepared with a wide and thin image in mind.
 
 ``` r
-finalise_plot(
-  plot_name = p1,
-  source = "Source: XX",
+final_plot <- finalise_plot(
+  plot_name = p1 + 
+    ggtitle("Example plot of mtcars", subtitle = "correlations"),
+  source = "Source: mtcars",
   logo_image_path = "inst/extdata/logo.png",
   width_pixels = 640,
   height_pixels = 550
 )
+
+final_plot
 ```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
