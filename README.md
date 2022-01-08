@@ -119,7 +119,19 @@ p3 <- ggplot(
 cowplot::plot_grid(p1, p2, p3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" /> ###
+sciensano style
+
+`sciensano_style()`: has no arguments and is added to the ggplot chain
+after you have created a plot. What it does is generally makes text
+size, font and colour, axis lines, axis text and many other standard
+chart components into Sciensano style.
+
+``` r
+p1+sciensano_style()
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ### Finalizing plots
 
@@ -163,4 +175,4 @@ width_pixels = 640,
 height_pixels = 550)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
