@@ -10,8 +10,7 @@ finalise_plot(
   save_filepath = FALSE,
   width_pixels = 640,
   height_pixels = 450,
-  logo_image_path = file.path(system.file("inst/extdata", package = "ggsano"),
-    "logo.png")
+  logo_image_path = file.path(system.file("extdata", package = "ggsano"), "logo.png")
 )
 }
 \arguments{
