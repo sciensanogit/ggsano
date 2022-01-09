@@ -1,0 +1,33 @@
+---
+title: "Create Sciensano Style Graph"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1-create-sciensano-style-graph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## How to create Sciensano style graphics
+
+At the Sciensano R team, we have developed an R package and an R github page to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.
+
+The github page manual below should hopefully help anyone who wants to make graphics like these:
+
+## Load all the libraries you need
+
+## Install the bbplot package
+
+## Make Arial font available in R
+
+## How does the ggsano package work?
+
+## Save out your finished chart
+
+
