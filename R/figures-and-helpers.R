@@ -21,7 +21,7 @@ sciensano_style <- function(font = "Arial") {
 
   ## build on theme_bw
 
-  ggplot2::theme_bw() %+replace%
+  ggplot2::theme_minimal() %+replace%
   ggplot2::theme(
 
     #Text format:

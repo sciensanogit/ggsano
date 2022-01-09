@@ -29,5 +29,6 @@ Depends:
 URL: https://sciensanogit.github.io/ggsano
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    pacman
 VignetteBuilder: knitr

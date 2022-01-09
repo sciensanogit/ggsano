@@ -10,12 +10,14 @@
 
 The goal of ggsano is to standardize and implement the Sciensano
 housestyle within R. The ggsano package currently provides three
-categories of important functions: sciensano\_style, sciensano\_colours
-and sciensano\_templates. The sciensano\_style functions can handle a
+categories of important functions: sciensano_style, sciensano_colours
+and sciensano_templates. The sciensano_style functions can handle a
 ggplot2-object and recompile it according to the Sciensano house style.
-The sciensano\_colours functions return the Sciensano house style
-colours in HEX format (‘\#XXXXXX’). Both discrete and continuous scales
-are available.
+The sciensano_colours functions return the Sciensano house style colours
+in HEX format (‘#XXXXXX’). Both discrete and continuous scales are
+available. The package is based on the functions as implemented by the
+[bbplot package](https://github.com/bbc/bbplot). So *kudos* to the BBC
+team.
 
 ## Installation
 
@@ -31,14 +33,6 @@ The package can be loaded by:
 
 ``` r
 library(ggsano)
-#> Scanning ttf files in C:\WINDOWS\Fonts ...
-#> Extracting .afm files from .ttf files...
-#> C:\Windows\Fonts\arial.ttf : ArialMT already registered in fonts database. Skipping.
-#> C:\Windows\Fonts\arialbd.ttf : Arial-BoldMT already registered in fonts database. Skipping.
-#> C:\Windows\Fonts\arialbi.ttf : Arial-BoldItalicMT already registered in fonts database. Skipping.
-#> C:\Windows\Fonts\ariali.ttf : Arial-ItalicMT already registered in fonts database. Skipping.
-#> Found FontName for 0 fonts.
-#> Scanning afm files in C:/Users/RoDe1798/Documents/R-4.0.2/library/extrafontdb/metrics
 ```
 
 ## Using the functions
@@ -88,10 +82,8 @@ Using the palette for a discrete scale:
 
 ``` r
 library("ggplot2")
-#> Warning: package 'ggplot2' was built under R version 4.0.5
 library("reshape2")
 library("cowplot")
-#> Warning: package 'cowplot' was built under R version 4.0.5
 
 data("mtcars")
 data("diamonds")

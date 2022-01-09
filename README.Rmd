@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of ggsano is to standardize and implement the Sciensano housestyle within R.
-The ggsano package currently provides three categories of important functions: sciensano_style, sciensano_colours and sciensano_templates. The sciensano_style functions can handle a ggplot2-object and recompile it according to the Sciensano house style. The sciensano_colours functions return the Sciensano house style colours in HEX format ('#XXXXXX'). Both discrete and continuous scales are available.
+The ggsano package currently provides three categories of important functions: sciensano_style, sciensano_colours and sciensano_templates. The sciensano_style functions can handle a ggplot2-object and recompile it according to the Sciensano house style. The sciensano_colours functions return the Sciensano house style colours in HEX format ('#XXXXXX'). Both discrete and continuous scales are available. The package is based on the functions as implemented by the [bbplot package](https://github.com/bbc/bbplot). So *kudos* to the BBC team.
 
 ## Installation
 

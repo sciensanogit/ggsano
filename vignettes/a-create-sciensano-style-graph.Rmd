@@ -1,0 +1,127 @@
+---
+title: "Create Sciensano Style Graph"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1-create-sciensano-style-graph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## How to create Sciensano style graphics
+
+At the Sciensano R team, we have developed an R package and an R github page to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.
+
+The github page manual below should hopefully help anyone who wants to make graphics like these:
+
+## Install the ggsano package
+ggsano is not on CRAN, so you will have to install it directly from Github using devtools.
+
+If you do not have the devtools package installed, you will have to run the first line in the code below as well.
+
+```r 
+# install.packages('devtools')
+devtools::install_github('sciensanogit/ggsano')
+```
+
+For more info on ggsano check out the [package’s Github repo](https://github.com/sciensanogit/ggsano), but most of the details about how to use the package and its functions are detailed below.
+
+When you have downloaded the package and successfully installed it you are good to go and create charts.
+
+## Load all the libraries you need
+
+A few of the steps in this manual - and to create charts in R in general - require certain packages to be installed and loaded.
+
+```{r}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
+## Load required packages
+pacman::p_load('dplyr', 'tidyr', 'ggplot2', 'png', 
+        'grid', 'ggpubr', 'scales', 'ggsano',
+        'gapminder')
+```
+
+## Make Arial and other fonts available in R
+
+## How does the ggsano package work?
+
+The package has two functions, `sciensano_style()` and `finalise_plot()`.
+
+`sciensano_style()`: the function takes one arguments (The font with the default set to `Arial`) and is added to the ggplot ‘chain’ after you have created a plot. What it does is generally makes text size, font and colour, axis lines, axis text, margins and many other standard chart components into Sciensano style.
+
+Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `sciensano_style()` function, but need to be explicitly set in your other standard ggplot chart functions.
+
+The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the gapminder package.
+
+```{r}
+#Data for chart from gapminder package
+line_df <- gapminder %>%
+  filter(country == "Belgium") 
+
+#Make plot
+line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
+  geom_line(colour = "#3AAA35FF", size = 1) +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  sciensano_style() +
+  labs(title="Life expectancy",
+       subtitle = "in Belgium 1952-2007")
+```
+
+```{r, echo = FALSE}
+line
+```
+
+Here is what the `sciensano_style()` function actually does under the hood. It essentially modifies certain arguments in the theme function of `ggplot2`.
+
+For example, the first argument is setting the font, size, typeface and colour of the title element of the plot.
+
+```{r, echo = FALSE}
+sciensano_style
+```
+
+## Save your finished chart
+
+After adding the `sciensano_style()` to your chart there is one more step to get your plot ready for publication. `finalise_plot()`, the second function of the bbplot package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:
+
+Here are the function arguments: `finalise_plot(plot_name, source, save_filepath, width_pixels = 640, height_pixels = 450)`
+
+*`plot_name`: the variable name that you have called your plot, for example for the chart example above `plot_name` would be `"line"`
+*`source`: the source text that you want to appear at the bottom left corner of your plot. You will need to type the word "Source:" before it, so for example `source = "Source: Sciensano"` would be the right way to do that.
+*`save_filepath`: the precise filepath that you want your graphic to save to, including the `.png` extension at the end. This does depend on your working directory and if you are in a specific R project. An example filepath would be: `Desktop/R_projects/charts/line_chart.png`.
+*`width_pixels`: this is set to `640px` by default, so only call this argument if you want the chart to have a different width, and specify what you want it to be.
+*`height_pixels`: this is set to `450px` by default, so only call this argument if you want the chart to have a different height, and specify what you want it to be.
+*`logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
+
+Example of how the `finalise_plot()` is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the `sciensano_style()` to it:
+
+```{r, eval = FALSE}
+line_logo <- finalise_plot(plot_name = line,
+              source = "Source: Gapminder",
+              save_filepath = "file_path_to_folder/plot_name.png",
+              width_pixels = 640,
+              height_pixels = 450, 
+              logo_image_path = "logo.png")
+```
+
+So once you have created your plot and are relatively happy with it, you can use the `finalise_plot()` function to make the final adjustments and save out your chart so that you can look at it outside RStudio.
+
+It is important to mention that it is a good idea to do this early on because the position of the text and other elements do not render accurately in the RStudio Plots panel because this depends on the size and aspect ratio you want your plot to appear, so saving it out and opening up the files give you an accurate representation of how the graphic looks.
+
+The `finalise_plot()` function does more than just save out your chart, it also left-aligns the title and subtitle as is standard for BBC graphics, adds a footer with the logo on the right side and lets you input source text on the left side.
+
+So how can you save out the example plot created above?
+
+```{r, eval=FALSE}
+finalise_plot(plot_name = line,
+              source = "Source: Gapminder",
+              save_filepath = "images/line_plot_finalised_test.png",
+              width_pixels = 640,
+              height_pixels = 550)
+```
