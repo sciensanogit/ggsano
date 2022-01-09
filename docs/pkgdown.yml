@@ -1,0 +1,14 @@
+pandoc: 2.14.0.3
+pkgdown: 2.0.1
+pkgdown_sha: ~
+articles:
+  1-create-sciensano-style-graph: 1-create-sciensano-style-graph.html
+  2-available-colors-schemes: 2-available-colors-schemes.html
+  3-example-charts: 3-example-charts.html
+  4-change-axes: 4-change-axes.html
+  5-change-legend: 5-change-legend.html
+last_built: 2022-01-09T11:19Z
+urls:
+  reference: https://sciensanogit.github.io/ggsano/reference
+  article: https://sciensanogit.github.io/ggsano/articles
+
