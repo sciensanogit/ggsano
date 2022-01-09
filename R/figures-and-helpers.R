@@ -3,6 +3,9 @@
 #' This function allows you to add the sciencsano theme to your ggplotgraphics.
 #' @keywords sciensano_style
 #' @param font Specify one of the available fonts (Default: Arial)
+#'
+#' @importFrom ggplot2 %+replace%
+#'
 #' @export
 #' @examples
 #' \dontrun{line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
