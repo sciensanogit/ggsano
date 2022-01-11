@@ -60,7 +60,7 @@ Region <-
         "contrast" = contrast,
         "GnRd" = GnRd,
         "PuBl" = PuBl,
-        "region" = region)
+        "region" = Region)
 
 ### continuous colours
 sciensano_col_c <-
