@@ -31,4 +31,3 @@ Suggests:
     rmarkdown,
     knitr,
     pacman
-VignetteBuilder: knitr

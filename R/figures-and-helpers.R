@@ -67,9 +67,9 @@ sciensano_style <- function(font = "Arial") {
     #This sets the panel background as blank, removing the standard grey ggplot background colour from the plot
     panel.background = ggplot2::element_blank(),
 
-    #Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 22)
-    strip.background = ggplot2::element_rect(fill="white"),
-    strip.text = ggplot2::element_text(size  = 22,  hjust = 0)
+    #Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 18)
+    strip.background = ggplot2::element_rect(fill="#3AAA35FF"),
+    strip.text = ggplot2::element_text(size  = 18, color = "white")
   )
 }
 

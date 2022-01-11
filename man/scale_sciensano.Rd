@@ -7,21 +7,21 @@
 \title{Sciensano Color Color Scales}
 \usage{
 scale_color_sciensano(
-  palette = c("default", "contrast", "GnRd", "PuBl"),
+  palette = c("default", "contrast", "GnRd", "PuBl", "region"),
   alpha = 1,
   reverse = FALSE,
   ...
 )
 
 scale_colour_sciensano(
-  palette = c("default", "contrast", "GnRd", "PuBl"),
+  palette = c("default", "contrast", "GnRd", "PuBl", "region"),
   alpha = 1,
   reverse = FALSE,
   ...
 )
 
 scale_fill_sciensano(
-  palette = c("default", "contrast", "GnRd", "PuBl"),
+  palette = c("default", "contrast", "GnRd", "PuBl", "region"),
   alpha = 1,
   reverse = FALSE,
   ...

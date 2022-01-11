@@ -19,7 +19,7 @@
 #' \dontrun{library("scales")
 #' show_col(pal_sciensano("default")(10))
 #' show_col(pal_sciensano("default", alpha = 0.6)(10))}
-pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
                           alpha = 1, reverse = FALSE) {
   palette <- match.arg(palette)
   if (alpha > 1L | alpha <= 0L) stop("alpha must be in (0, 1]")
@@ -69,7 +69,7 @@ pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
 #'   geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
 #'   theme_bw() + scale_fill_sciensano()}
 
-scale_color_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+scale_color_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
                                   alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
   discrete_scale("colour", "sciensano", pal_sciensano(palette, alpha, reverse), ...)
@@ -82,7 +82,7 @@ scale_colour_sciensano <- scale_color_sciensano
 #' @export scale_fill_sciensano
 #' @importFrom ggplot2 discrete_scale
 #' @rdname scale_sciensano
-scale_fill_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl"),
+scale_fill_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
                                  alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
   discrete_scale("fill", "sciensano", pal_sciensano(palette, alpha, reverse), ...)

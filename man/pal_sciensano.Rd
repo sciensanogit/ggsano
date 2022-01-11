@@ -5,7 +5,7 @@
 \title{Sciensano Discrete Color Palettes}
 \usage{
 pal_sciensano(
-  palette = c("default", "contrast", "GnRd", "PuBl"),
+  palette = c("default", "contrast", "GnRd", "PuBl", "region"),
   alpha = 1,
   reverse = FALSE
 )
