@@ -49,11 +49,18 @@ PuBl <-
     "greenblue" = rgb(red = 96, green = 188, blue = 184, maxColorValue = 255),
     "darkblue" = rgb(red = 34, green = 133, blue = 147, maxColorValue = 255))
 
+Region <-
+  c("BE" = rgb(red = 88, green = 89, blue = 91, maxColorValue = 255),
+    "BR" = rgb(red = 132, green = 165, blue = 215, maxColorValue = 255),
+    "FL" = rgb(red = 250, green = 213, blue = 0, maxColorValue = 255),
+    "WA" = rgb(red = 201, green = 81, blue = 23, maxColorValue = 255))
+
  sciensano_col_d <-
    list("default" = default,
         "contrast" = contrast,
         "GnRd" = GnRd,
-        "PuBl" = PuBl)
+        "PuBl" = PuBl,
+        "region" = Region)
 
 ### continuous colours
 sciensano_col_c <-

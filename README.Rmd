@@ -46,31 +46,37 @@ For the color palette `pal_sciensano`, there are four options available: `defaul
 
 **DEFAULT**
 
-```{r}
+```{r allcolours_1}
 scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 ```
 
 **CONTRAST**
 
-```{r}
+```{r contrast_1}
 scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 ```
 
 **GnRd**
 
-```{r}
+```{r gnrd_1}
 scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 ```
 
 **PuBl**
 
-```{r}
+```{r publ_1}
 scales::show_col(pal_sciensano(palette = "PuBl")(6),  labels = TRUE)
+```
+
+**region**
+
+```{r region_1}
+scales::show_col(pal_sciensano(palette = "region")(4),  labels = TRUE)
 ```
 
 Using the palette for a discrete scale:
 
-```{r}
+```{r discrete_1}
 library("ggplot2")
 library("reshape2")
 library("cowplot")
@@ -96,7 +102,7 @@ ggplot(
 
 Using the palette for a continuous scale:
 
-```{r}
+```{r corexample_1}
 cor <- abs(cor(mtcars))
 cor_melt <- melt(cor)
 
@@ -128,14 +134,14 @@ cowplot::plot_grid(p1, p2, p3)
 
 `sciensano_style()`: has no arguments and is added to the ggplot chain after you have created a plot. It will change the text-size, font, and lay-out of the graph into a dedicated Sciensano theme.
 
-```{r}
+```{r concol_1}
 p1 +
   sciensano_style() + ## Default font is Arial.
   theme(legend.key.width = ggplot2::unit(2.5, "cm")) ## extend the legend
 
 ```
 
-```{r}
+```{r catcol_1}
 ggplot(
   subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),
   aes(x = depth, fill = cut)) +
@@ -158,7 +164,7 @@ Here are the function arguments: `finalise_plot(plot_name, source_name, save_fil
 * `height_pixels`: this is set to 450px by default, so only call this argument and specify the height you want your chart to be.
 * `logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
 
-```{r example}
+```{r example_1}
 final_plot <- finalise_plot(
   plot_name = p1 + 
     sciensano_style() +

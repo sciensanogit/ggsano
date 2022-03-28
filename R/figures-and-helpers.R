@@ -67,9 +67,9 @@ sciensano_style <- function(font = "Arial") {
     #This sets the panel background as blank, removing the standard grey ggplot background colour from the plot
     panel.background = ggplot2::element_blank(),
 
-    #Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 22)
-    strip.background = ggplot2::element_rect(fill="white"),
-    strip.text = ggplot2::element_text(size  = 22,  hjust = 0)
+    #Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 18)
+    strip.background = ggplot2::element_rect(fill="#3AAA35FF"),
+    strip.text = ggplot2::element_text(size  = 18, color = "white")
   )
 }
 
@@ -144,7 +144,7 @@ create_footer <- function (source_name, logo_image_path) {
   footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
                            grid::textGrob(source_name,
                                           x = 0.004, hjust = 0, gp = grid::gpar(fontsize=16)),
-                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.925))
+                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.900))
   return(footer)
 
 }

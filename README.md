@@ -8,10 +8,23 @@
 [![R-CMD-check](https://github.com/sciensanogit/ggsano/workflows/R-CMD-check/badge.svg)](https://github.com/sciensanogit/ggsano/actions)
 <!-- badges: end -->
 
+<<<<<<< HEAD
 The goal of ggsano is to make the Sciensano color and housestyle
 available in R. The creation of this package was based on the [bbplot
 package](https://github.com/bbc/bbplot), a package with the same
 intetions createb by the BBC. So *kudos* to the BBC team.
+=======
+The goal of ggsano is to standardize and implement the Sciensano
+housestyle within R. The ggsano package currently provides three
+categories of important functions: sciensano\_style, sciensano\_colours
+and sciensano\_templates. The sciensano\_style functions can handle a
+ggplot2-object and recompile it according to the Sciensano house style.
+The sciensano\_colours functions return the Sciensano house style
+colours in HEX format (‘\#XXXXXX’). Both discrete and continuous scales
+are available. The package is based on the functions as implemented by
+the [bbplot package](https://github.com/bbc/bbplot). So *kudos* to the
+BBC team.
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 ## Installation
 
@@ -27,6 +40,34 @@ The package can be loaded in R by:
 
 ``` r
 library(ggsano)
+#> Scanning ttf files in C:\WINDOWS\Fonts ...
+#> Extracting .afm files from .ttf files...
+#> C:\Windows\Fonts\arial.ttf
+#> Warning in system2(ttf2pt1, c(args, shQuote(ttfiles[i]),
+#> shQuote(tmpfiles[i])), : running command '"C:/Users/RoDe1798/Documents/R-4.0.2/
+#> library/Rttf2pt1/exec/ttf2pt1.exe" -a -G fAe "C:\Windows\Fonts\arial.ttf" "C:
+#> \Users\RoDe1798\AppData\Local\Temp\RtmpUn47Vs/fonts/arial"' had status 5
+#>  : No FontName. Skipping.
+#> C:\Windows\Fonts\arialbd.ttf
+#> Warning in system2(ttf2pt1, c(args, shQuote(ttfiles[i]),
+#> shQuote(tmpfiles[i])), : running command '"C:/Users/RoDe1798/Documents/R-4.0.2/
+#> library/Rttf2pt1/exec/ttf2pt1.exe" -a -G fAe "C:\Windows\Fonts\arialbd.ttf" "C:
+#> \Users\RoDe1798\AppData\Local\Temp\RtmpUn47Vs/fonts/arialbd"' had status 5
+#>  : No FontName. Skipping.
+#> C:\Windows\Fonts\arialbi.ttf
+#> Warning in system2(ttf2pt1, c(args, shQuote(ttfiles[i]),
+#> shQuote(tmpfiles[i])), : running command '"C:/Users/RoDe1798/Documents/R-4.0.2/
+#> library/Rttf2pt1/exec/ttf2pt1.exe" -a -G fAe "C:\Windows\Fonts\arialbi.ttf" "C:
+#> \Users\RoDe1798\AppData\Local\Temp\RtmpUn47Vs/fonts/arialbi"' had status 5
+#>  : No FontName. Skipping.
+#> C:\Windows\Fonts\ariali.ttf
+#> Warning in system2(ttf2pt1, c(args, shQuote(ttfiles[i]),
+#> shQuote(tmpfiles[i])), : running command '"C:/Users/RoDe1798/Documents/R-4.0.2/
+#> library/Rttf2pt1/exec/ttf2pt1.exe" -a -G fAe "C:\Windows\Fonts\ariali.ttf" "C:
+#> \Users\RoDe1798\AppData\Local\Temp\RtmpUn47Vs/fonts/ariali"' had status 5
+#>  : No FontName. Skipping.
+#> Found FontName for 0 fonts.
+#> Scanning afm files in C:/Users/RoDe1798/Documents/R-4.0.2/library/extrafontdb/metrics
 ```
 
 ## Using the functions
@@ -46,7 +87,11 @@ as follows:
 scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+=======
+<img src="man/figures/README-allcolours_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 **CONTRAST**
 
@@ -54,7 +99,11 @@ scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+=======
+<img src="man/figures/README-contrast_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 **GnRd**
 
@@ -62,7 +111,11 @@ scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+=======
+<img src="man/figures/README-gnrd_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 **PuBl**
 
@@ -70,14 +123,30 @@ scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 scales::show_col(pal_sciensano(palette = "PuBl")(6),  labels = TRUE)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+=======
+<img src="man/figures/README-publ_1-1.png" width="100%" />
+
+**region**
+
+``` r
+scales::show_col(pal_sciensano(palette = "region")(4),  labels = TRUE)
+#> Warning: This manual palette can handle a maximum of 0 values. You have supplied
+#> 4.
+```
+
+<img src="man/figures/README-region_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 Using the palette for a discrete scale:
 
 ``` r
 library("ggplot2")
+#> Warning: package 'ggplot2' was built under R version 4.0.5
 library("reshape2")
 library("cowplot")
+#> Warning: package 'cowplot' was built under R version 4.0.5
 
 data("mtcars")
 data("diamonds")
@@ -92,7 +161,11 @@ ggplot(
 #> `geom_smooth()` using formula 'y ~ x'
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+=======
+<img src="man/figures/README-discrete_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 ``` r
 ggplot(
@@ -103,7 +176,11 @@ ggplot(
   theme_bw() + scale_fill_sciensano(palette = "GnRd", reverse = TRUE)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-6-2.png" width="100%" />
+=======
+<img src="man/figures/README-discrete_1-2.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 Using the palette for a continuous scale:
 
@@ -135,7 +212,11 @@ p3 <- ggplot(
 cowplot::plot_grid(p1, p2, p3)
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+=======
+<img src="man/figures/README-corexample_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 ### sciensano style
 
@@ -149,7 +230,11 @@ p1 +
   theme(legend.key.width = ggplot2::unit(2.5, "cm")) ## extend the legend
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+=======
+<img src="man/figures/README-concol_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 ``` r
 ggplot(
@@ -160,7 +245,11 @@ ggplot(
   sciensano_style()
 ```
 
+<<<<<<< HEAD
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+=======
+<img src="man/figures/README-catcol_1-1.png" width="100%" />
+>>>>>>> dbba8879304e6659f5d2acb3d6724bf30bdfbc27
 
 ### Finalizing plots
 
@@ -210,4 +299,4 @@ final_plot <- finalise_plot(
 final_plot
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example_1-1.png" width="100%" />
