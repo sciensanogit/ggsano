@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(ggsano)
 ```
 
 # GGSANO
@@ -19,21 +20,20 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/sciensanogit/ggsano/workflows/R-CMD-check/badge.svg)](https://github.com/sciensanogit/ggsano/actions)
 <!-- badges: end -->
 
-The goal of ggsano is to standardize and implement the Sciensano housestyle within R.
-The ggsano package currently provides three categories of important functions: sciensano_style, sciensano_colours and sciensano_templates. The sciensano_style functions can handle a ggplot2-object and recompile it according to the Sciensano house style. The sciensano_colours functions return the Sciensano house style colours in HEX format ('#XXXXXX'). Both discrete and continuous scales are available. The package is based on the functions as implemented by the [bbplot package](https://github.com/bbc/bbplot). So *kudos* to the BBC team.
+The goal of ggsano is to make the Sciensano color and housestyle available in R. The creation of this package was based on the [bbplot package](https://github.com/bbc/bbplot), a package with the same intetions createb by the BBC. So *kudos* to the BBC team.
 
 ## Installation
 
-You can install the development version of ggsano from [GitHub](https://github.com/) with:
+You can install the latest version of ggsano from [GitHub](https://github.com/) by running the following code:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("sciensanogit/ggsano")
 ```
 
-The package can be loaded by:
+The package can be loaded in R by:
 
-```{r}
+``` r
 library(ggsano)
 ```
 

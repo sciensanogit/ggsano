@@ -8,28 +8,22 @@
 [![R-CMD-check](https://github.com/sciensanogit/ggsano/workflows/R-CMD-check/badge.svg)](https://github.com/sciensanogit/ggsano/actions)
 <!-- badges: end -->
 
-The goal of ggsano is to standardize and implement the Sciensano
-housestyle within R. The ggsano package currently provides three
-categories of important functions: sciensano_style, sciensano_colours
-and sciensano_templates. The sciensano_style functions can handle a
-ggplot2-object and recompile it according to the Sciensano house style.
-The sciensano_colours functions return the Sciensano house style colours
-in HEX format (‘#XXXXXX’). Both discrete and continuous scales are
-available. The package is based on the functions as implemented by the
-[bbplot package](https://github.com/bbc/bbplot). So *kudos* to the BBC
-team.
+The goal of ggsano is to make the Sciensano color and housestyle
+available in R. The creation of this package was based on the [bbplot
+package](https://github.com/bbc/bbplot), a package with the same
+intetions createb by the BBC. So *kudos* to the BBC team.
 
 ## Installation
 
-You can install the development version of ggsano from
-[GitHub](https://github.com/) with:
+You can install the latest version of ggsano from
+[GitHub](https://github.com/) by running the following code:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("sciensanogit/ggsano")
 ```
 
-The package can be loaded by:
+The package can be loaded in R by:
 
 ``` r
 library(ggsano)
@@ -52,7 +46,7 @@ as follows:
 scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 **CONTRAST**
 
@@ -60,7 +54,7 @@ scales::show_col(pal_sciensano(palette = "default")(14), labels = TRUE)
 scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 **GnRd**
 
@@ -68,7 +62,7 @@ scales::show_col(pal_sciensano(palette = "contrast")(12),  labels = TRUE)
 scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 **PuBl**
 
@@ -76,7 +70,7 @@ scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 scales::show_col(pal_sciensano(palette = "PuBl")(6),  labels = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 Using the palette for a discrete scale:
 
@@ -98,7 +92,7 @@ ggplot(
 #> `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ``` r
 ggplot(
@@ -109,7 +103,7 @@ ggplot(
   theme_bw() + scale_fill_sciensano(palette = "GnRd", reverse = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-2.png" width="100%" />
 
 Using the palette for a continuous scale:
 
@@ -141,7 +135,7 @@ p3 <- ggplot(
 cowplot::plot_grid(p1, p2, p3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ### sciensano style
 
@@ -155,7 +149,7 @@ p1 +
   theme(legend.key.width = ggplot2::unit(2.5, "cm")) ## extend the legend
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 ``` r
 ggplot(
@@ -166,7 +160,7 @@ ggplot(
   sciensano_style()
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ### Finalizing plots
 
