@@ -42,6 +42,7 @@ library(ggsano)
 ### Colors
 The package has two palettes-functions available: `pal_sciensano()` for discrete colors, and `pal_sciensano_c()` for continuous colors.
 
+#### Available palettes
 For the color palette `pal_sciensano`, there are four options available: `default`, `contrast`, `GnRd`, and `PuBl`.  The colors and HEX-codes are as follows:
 
 **DEFAULT**
@@ -68,12 +69,7 @@ scales::show_col(pal_sciensano(palette = "GnRd")(6),  labels = TRUE)
 scales::show_col(pal_sciensano(palette = "PuBl")(6),  labels = TRUE)
 ```
 
-**region**
-
-```{r region_1}
-scales::show_col(pal_sciensano(palette = "region")(4),  labels = TRUE)
-```
-
+#### Examples
 Using the palette for a discrete scale:
 
 ```{r discrete_1}
@@ -130,7 +126,7 @@ p3 <- ggplot(
 cowplot::plot_grid(p1, p2, p3)
 ```
 
-### sciensano style
+### Sciensano style
 
 `sciensano_style()`: has no arguments and is added to the ggplot chain after you have created a plot. It will change the text-size, font, and lay-out of the graph into a dedicated Sciensano theme.
 
