@@ -3,7 +3,7 @@ title: "Example Charts"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{3-example-charts}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

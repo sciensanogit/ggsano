@@ -3,7 +3,7 @@ title: "Create Sciensano Style Graph"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{1-create-sciensano-style-graph}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

@@ -13,6 +13,7 @@ Description: ggsano is a package developen by the R community within Sciensano t
     be integrated in ggplot2, and the package will take a ggplot2 object and recompile
     it according to the Sciensano house style.
 License: MIT + file LICENSE
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

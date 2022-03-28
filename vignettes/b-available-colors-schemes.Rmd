@@ -3,7 +3,7 @@ title: "Available Colors Schemes"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2-available-colors-schemes}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

@@ -3,7 +3,7 @@ title: "Change Axes"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{4-change-axes}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

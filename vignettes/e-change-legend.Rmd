@@ -3,7 +3,7 @@ title: "Change Legend"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{5-change-legend}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
