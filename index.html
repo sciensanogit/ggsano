@@ -41,20 +41,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/1-create-sciensano-style-graph.html">Create Sciensano Style Graph</a>
-    <a class="dropdown-item" href="articles/2-available-colors-schemes.html">Available Colors Schemes</a>
-    <a class="dropdown-item" href="articles/3-example-charts.html">Example Charts</a>
-    <a class="dropdown-item" href="articles/4-change-axes.html">Change Axes</a>
-    <a class="dropdown-item" href="articles/5-change-legend.html">Change Legend</a>
-  </div>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -73,25 +63,17 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of ggsano is to standardize and implement the Sciensano housestyle within R. The ggsano package currently provides three categories of important functions: sciensano_style, sciensano_colours and sciensano_templates. The sciensano_style functions can handle a ggplot2-object and recompile it according to the Sciensano house style. The sciensano_colours functions return the Sciensano house style colours in HEX format (‘#XXXXXX’). Both discrete and continuous scales are available.</p>
+<p>The goal of ggsano is to make the Sciensano color and housestyle available in R. The creation of this package was based on the <a href="https://github.com/bbc/bbplot" class="external-link">bbplot package</a>, a package with the same intetions createb by the BBC. So <em>kudos</em> to the BBC team.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of ggsano from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the latest version of ggsano from <a href="https://github.com/" class="external-link">GitHub</a> by running the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sciensanogit/ggsano"</span><span class="op">)</span></code></pre></div>
-<p>The package can be loaded by:</p>
+<p>The package can be loaded in R by:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sciensanogit.github.io/ggsano">ggsano</a></span><span class="op">)</span>
-<span class="co">#&gt; Scanning ttf files in C:\WINDOWS\Fonts ...</span>
-<span class="co">#&gt; Extracting .afm files from .ttf files...</span>
-<span class="co">#&gt; C:\Windows\Fonts\arial.ttf : ArialMT already registered in fonts database. Skipping.</span>
-<span class="co">#&gt; C:\Windows\Fonts\arialbd.ttf : Arial-BoldMT already registered in fonts database. Skipping.</span>
-<span class="co">#&gt; C:\Windows\Fonts\arialbi.ttf : Arial-BoldItalicMT already registered in fonts database. Skipping.</span>
-<span class="co">#&gt; C:\Windows\Fonts\ariali.ttf : Arial-ItalicMT already registered in fonts database. Skipping.</span>
-<span class="co">#&gt; Found FontName for 0 fonts.</span>
-<span class="co">#&gt; Scanning afm files in C:/Users/RoDe1798/Documents/R-4.0.2/library/extrafontdb/metrics</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sciensanogit.github.io/ggsano" class="external-link">ggsano</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="using-the-functions">Using the functions<a class="anchor" aria-label="anchor" href="#using-the-functions"></a>
@@ -100,30 +82,35 @@
 <h3 id="colors">Colors<a class="anchor" aria-label="anchor" href="#colors"></a>
 </h3>
 <p>The package has two palettes-functions available: <code><a href="reference/pal_sciensano.html">pal_sciensano()</a></code> for discrete colors, and <code><a href="reference/pal_sciensano_c.html">pal_sciensano_c()</a></code> for continuous colors.</p>
+<div class="section level4">
+<h4 id="available-palettes">Available palettes<a class="anchor" aria-label="anchor" href="#available-palettes"></a>
+</h4>
 <p>For the color palette <code>pal_sciensano</code>, there are four options available: <code>default</code>, <code>contrast</code>, <code>GnRd</code>, and <code>PuBl</code>. The colors and HEX-codes are as follows:</p>
 <p><strong>DEFAULT</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/show_col.html" class="external-link">show_col</a></span><span class="op">(</span><span class="fu"><a href="reference/pal_sciensano.html">pal_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"default"</span><span class="op">)</span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>, labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<p><img src="reference/figures/README-allcolours_1-1.png" width="100%"></p>
 <p><strong>CONTRAST</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/show_col.html" class="external-link">show_col</a></span><span class="op">(</span><span class="fu"><a href="reference/pal_sciensano.html">pal_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"contrast"</span><span class="op">)</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,  labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="reference/figures/README-contrast_1-1.png" width="100%"></p>
 <p><strong>GnRd</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/show_col.html" class="external-link">show_col</a></span><span class="op">(</span><span class="fu"><a href="reference/pal_sciensano.html">pal_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"GnRd"</span><span class="op">)</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>,  labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+<p><img src="reference/figures/README-gnrd_1-1.png" width="100%"></p>
 <p><strong>PuBl</strong></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/show_col.html" class="external-link">show_col</a></span><span class="op">(</span><span class="fu"><a href="reference/pal_sciensano.html">pal_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"PuBl"</span><span class="op">)</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>,  labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<p><img src="reference/figures/README-publ_1-1.png" width="100%"></p>
+</div>
+<div class="section level4">
+<h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h4>
 <p>Using the palette for a discrete scale:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.0.5</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/hadley/reshape" class="external-link">"reshape2"</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://wilkelab.org/cowplot/" class="external-link">"cowplot"</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning: package 'cowplot' was built under R version 4.0.5</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"diamonds"</span><span class="op">)</span>
@@ -136,7 +123,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>, size <span class="op">=</span> <span class="fl">1</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/scale_sciensano.html">scale_color_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"GnRd"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; `geom_smooth()` using formula 'y ~ x'</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="reference/figures/README-discrete_1-1.png" width="100%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="va">carat</span> <span class="op">&gt;</span> <span class="fl">2.2</span> <span class="op">&amp;</span> <span class="va">depth</span> <span class="op">&gt;</span> <span class="fl">55</span> <span class="op">&amp;</span> <span class="va">depth</span> <span class="op">&lt;</span> <span class="fl">70</span><span class="op">)</span>,
@@ -144,11 +131,11 @@
 <span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span>, binwidth <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/scale_sciensano.html">scale_fill_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"GnRd"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-2.png" width="100%"></p>
+<p><img src="reference/figures/README-discrete_1-2.png" width="100%"></p>
 <p>Using the palette for a continuous scale:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="va">cor_melt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html" class="external-link">melt</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span>
+<span class="va">cor_melt</span> <span class="op">&lt;-</span> <span class="fu">melt</span><span class="op">(</span><span class="va">cor</span><span class="op">)</span>
 
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
   <span class="va">cor_melt</span>,
@@ -172,17 +159,18 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/scale_sciensano_c.html">scale_fill_sciensano_c</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
 
 <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"></p>
+<p><img src="reference/figures/README-corexample_1-1.png" width="100%"></p>
+</div>
 </div>
 <div class="section level3">
-<h3 id="sciensano-style">sciensano style<a class="anchor" aria-label="anchor" href="#sciensano-style"></a>
+<h3 id="sciensano-style">Sciensano style<a class="anchor" aria-label="anchor" href="#sciensano-style"></a>
 </h3>
 <p><code><a href="reference/sciensano_style.html">sciensano_style()</a></code>: has no arguments and is added to the ggplot chain after you have created a plot. It will change the text-size, font, and lay-out of the graph into a dedicated Sciensano theme.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">+</span>
   <span class="fu"><a href="reference/sciensano_style.html">sciensano_style</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co">## Default font is Arial.</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.key.width <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="co">## extend the legend</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+<p><img src="reference/figures/README-concol_1-1.png" width="100%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="va">carat</span> <span class="op">&gt;</span> <span class="fl">2.2</span> <span class="op">&amp;</span> <span class="va">depth</span> <span class="op">&gt;</span> <span class="fl">55</span> <span class="op">&amp;</span> <span class="va">depth</span> <span class="op">&lt;</span> <span class="fl">70</span><span class="op">)</span>,
@@ -190,7 +178,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span>, binwidth <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="reference/scale_sciensano.html">scale_fill_sciensano</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"GnRd"</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/sciensano_style.html">sciensano_style</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
+<p><img src="reference/figures/README-catcol_1-1.png" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="finalizing-plots">Finalizing plots<a class="anchor" aria-label="anchor" href="#finalizing-plots"></a>
@@ -224,7 +212,7 @@
 <span class="op">)</span>
 
 <span class="va">final_plot</span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="100%"></p>
+<p><img src="reference/figures/README-example_1-1.png" width="100%"></p>
 </div>
 </div>
 </div>
@@ -269,7 +257,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
