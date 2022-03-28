@@ -1,6 +1,7 @@
 pandoc: 2.7.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-03-28T20:32Z
+articles:
+  a-create-sciensano-graphs: web_only/a-create-sciensano-graphs.html
+last_built: 2022-03-28T20:57Z
 
