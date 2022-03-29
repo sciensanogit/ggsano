@@ -1,0 +1,55 @@
+---
+title: "Create other type of charts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{e-other-charts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(ggsano)
+library(ggsano) ## style
+library(dplyr) ## data management
+library(tidyr) ## data management
+library(ggplot2) ## plot
+library(ggalt)
+load("../R/sysdata.rda")
+```
+
+## Create a Dumbell chart
+
+```{r}
+#Prepare data
+dumbbell_df <- dta %>%
+  filter(LEVEL == 3 &
+           REGIOJ == "Belgium" &
+           MEASURE == "Deaths" &
+           METRIC == "Rate" &
+           AGEGRP %in% c("ALL") &
+           SEX == "Both sexes" &
+           YEAR %in% c(2004, 2018)) %>%
+  pivot_wider(id_cols = CAUSE, names_from = YEAR, values_from = VAL_MEAN) %>%
+  mutate(gap = `2018` - `2004`) %>%
+  arrange(desc(gap)) %>%
+  head(10)
+
+#Make plot
+ggplot(dumbbell_df, aes(x = `2004`, xend = `2018`, y = reorder(CAUSE, gap), group = CAUSE)) + 
+  geom_dumbbell(colour = "#dddddd",
+                size = 3,
+                colour_x = pal_sciensano("GnRd")(6)[1],
+                colour_xend = pal_sciensano("GnRd")(6)[6]) +
+  sciensano_style() + 
+  labs(title="Rise in deaths",
+       subtitle="Biggest rise in deaths, 2004-2018")
+```
+
+

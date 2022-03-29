@@ -20,27 +20,31 @@ library(ggsano) ## style
 library(dplyr) ## data management
 library(tidyr) ## data management
 library(ggplot2) ## plot
-library(readr) ## read data
 load("../R/sysdata.rda")
 ```
 
 ## Create a single line chart
 
 ```{r}
-#Prepare data
+#Data for chart from gapminder package
 line_df <- dta %>%
-  filter(geo == "bel")
+  filter(CAUSE == "ALL CAUSES" &
+           REGIOJ == "Belgium" &
+           MEASURE == "Deaths" &
+           METRIC == "Rate" &
+           AGEGRP == "ALL" &
+           SEX == "Both sexes")
 
 #Get Sciensano color
 col <- pal_sciensano()(1)
 
 #Make plot
-line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
+line <- ggplot(line_df, aes(x = YEAR, y = VAL_MEAN)) +
   geom_line(colour = col, size = 1) +
   geom_hline(yintercept = 0, size = 1, colour="#333333") +
   sciensano_style() +
-  labs(title="Living longer",
-       subtitle = "Life expectancy in Belgium 1952-2007")
+  labs(title="Deaths",
+       subtitle = "Number of deaths in Belgium 2004-2018")
 ```
 
 ```{r, echo = FALSE}
@@ -50,18 +54,23 @@ line
 ## Create a multiple line chart
 
 ```{r}
-#Prepare data
+#Data for chart from gapminder package
 line_df <- dta %>%
-  filter(geo %in% c("bel", "chn")) 
+  filter(CAUSE == "ALL CAUSES" &
+           REGIOJ %in% c("Flanders", "Brussels", "Wallonia") &
+           MEASURE == "Deaths" &
+           METRIC == "Rate" &
+           AGEGRP == "ALL" &
+           SEX == "Both sexes")
 
 #Make plot
-line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth, color = geo)) +
+line <- ggplot(line_df, aes(x = YEAR, y = VAL_MEAN, color = REGIOJ)) +
   geom_line(size = 1) +
   geom_hline(yintercept = 0, size = 1, colour="#333333") +
   sciensano_style() +
   scale_color_sciensano() +
-  labs(title="Living longer",
-       subtitle = "Life expectancy in Belgium and the USA")
+  labs(title="Deaths",
+       subtitle = "Number of deaths in Brussels, Flanders, and Wallonia")
 ```
 
 ```{r, echo = FALSE}

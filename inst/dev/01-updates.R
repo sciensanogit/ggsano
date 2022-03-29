@@ -59,15 +59,21 @@ devtools::check()
 ## UPDATE THE WEBSITE
 ## create font example
 #Data for chart from gapminder package
-line_df <- dta %>%
-  filter(geo == "bel")
+line_df <- line_df <- dta %>%
+  filter(CAUSE == "ALL CAUSES" &
+           REGIOJ == "Belgium" &
+           MEASURE == "Deaths" &
+           METRIC == "Rate" &
+           AGEGRP == "ALL" &
+           SEX == "Both sexes")
 
 #Make plot
-line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
-  geom_line(colour = "#1380A1", size = 1) +
+line <- ggplot(line_df, aes(x = YEAR, y = VAL_MEAN)) +
+  geom_line(colour = col, size = 1) +
   geom_hline(yintercept = 0, size = 1, colour="#333333") +
-  labs(title="Living longer",
-       subtitle = "Life expectancy in Belgium 1952-2007")
+  sciensano_style() +
+  labs(title="Deaths",
+       subtitle = "Number of deaths in Belgium 2004-2018")
 
 pl1 <- line + sciensano_style(font = "Arial") + ggtitle("Arial")
 pl2 <- line + sciensano_style(font = "Papyrus") + ggtitle("Papyrus")

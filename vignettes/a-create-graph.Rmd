@@ -34,7 +34,6 @@ library(ggsano) ## style
 library(dplyr) ## data management
 library(tidyr) ## data management
 library(ggplot2) ## plot
-library(readr) ## read data
 ```
 
 ## How does the ggsano package work?
@@ -44,25 +43,33 @@ The package has two functions, `sciensano_style()` and `finalise_plot()`.
 
 Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `sciensano_style()` function, but need to be explicitly set in your other standard ggplot chart functions.
 
-The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from gapminder.
+The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the Belgian burden of disease study (BeBOD).
 
 First, we need to read in the data:
 ```r
-dta <- read_csv("https://raw.githubusercontent.com/open-numbers/ddf--gapminder--life_expectancy/master/ddf--datapoints--life_expectancy_at_birth--by--geo--time.csv")
+dta <- read_csv("https://burden.sciensano.be/shiny/daly/session/33266afb66727f845fe25968b354f344/download/downloadData?w=")
 ```
 Hereunder is an example graph:
 ```{r}
 #Data for chart from gapminder package
 line_df <- dta %>%
-  filter(geo == "bel") 
+  filter(CAUSE == "ALL CAUSES" &
+           REGIOJ == "Belgium" &
+           MEASURE == "Deaths" &
+           METRIC == "Rate" &
+           AGEGRP == "ALL" &
+           SEX == "Both sexes")
+
+#Get Sciensano color
+col <- pal_sciensano()(1)
 
 #Make plot
-line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
-  geom_line(colour = "#1380A1", size = 1) +
+line <- ggplot(line_df, aes(x = YEAR, y = VAL_MEAN)) +
+  geom_line(colour = col, size = 1) +
   geom_hline(yintercept = 0, size = 1, colour="#333333") +
   sciensano_style() +
-  labs(title="Living longer",
-       subtitle = "Life expectancy in Belgium 1952-2007")
+  labs(title="Deaths",
+       subtitle = "Number of deaths in Belgium 2004-2018")
 ```
 
 ```{r, echo = FALSE}

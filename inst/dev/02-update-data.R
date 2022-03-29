@@ -89,7 +89,9 @@ scales::show_col(colfunc(1000), labels = FALSE)
 
 ## create example data (based on gaminder) ####
 ## create example dataset
-dta <- read_csv("https://raw.githubusercontent.com/open-numbers/ddf--gapminder--life_expectancy/master/ddf--datapoints--life_expectancy_at_birth--by--geo--time.csv")
+# dta <- read_csv("https://raw.githubusercontent.com/open-numbers/ddf--gapminder--life_expectancy/master/ddf--datapoints--life_expectancy_at_birth--by--geo--time.csv")
+# dta <- read_csv("https://burden.sciensano.be/shiny/daly/session/33266afb66727f845fe25968b354f344/download/downloadData?w=")
+dta <- readRDS("inst/extdata/BeBOD-COD-20220329.rds")
 
 ## save data
 usethis::use_data(sciensano_col_d, sciensano_col_c, dta, internal = TRUE, overwrite = TRUE)
