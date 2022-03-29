@@ -1,5 +1,5 @@
 ---
-title: "a-create-graph"
+title: "Create Sciensano Graphs"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{a-create-graph}
@@ -17,3 +17,48 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ggsano)
 ```
+
+## How to create Sciensano style graphics
+
+At the BBC data team, we have developed an R package and an R cookbook to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.
+
+The cookbook below should hopefully help anyone who wants to make graphics like these:
+
+## Load all the libraries you need
+
+A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. So that you do not have to install and load them one by one, you can use the p_load function in the pacman package to load them all at once with the following code.
+
+```{r}
+library(gapminder)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+## How does the bbplot package work?
+The package has two functions, `sciensano_style()` and `finalise_plot()`.
+
+`sciensano_style()`: has no arguments and is added to the ggplot ‘chain’ after you have created a plot. What it does is generally makes text size, font and colour, axis lines, axis text, margins and many other standard chart components into Sciensano style, which has been formulated based on recommendations and feedback from the design team.
+
+Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `sciensano_style()` function, but need to be explicitly set in your other standard ggplot chart functions.
+
+The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the gapminder package.
+
+```{r}
+#Data for chart from gapminder package
+line_df <- gapminder %>%
+  filter(country == "Belgium") 
+
+#Make plot
+line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
+  geom_line(colour = "#1380A1", size = 1) +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  sciensano_style() +
+  labs(title="Living longer",
+       subtitle = "Life expectancy in Belgium 1952-2007")
+```
+
+```{r, echo = FALSE}
+line
+```
+
