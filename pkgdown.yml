@@ -4,5 +4,9 @@ pkgdown_sha: ~
 articles:
   a-create-graph: a-create-graph.html
   b-add-fond: b-add-fond.html
-last_built: 2022-03-29T11:44Z
+  c-line-charts: c-line-charts.html
+  d-bar-charts: d-bar-charts.html
+  e-other-charts: e-other-charts.html
+  f-customize-legend: f-customize-legend.html
+last_built: 2022-03-29T21:45Z
 

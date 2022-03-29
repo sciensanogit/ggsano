@@ -43,6 +43,10 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/a-create-graph.html">Create Sciensano Graphs</a>
     <a class="dropdown-item" href="../articles/b-add-fond.html">Add custom fonts to parse to the plot</a>
+    <a class="dropdown-item" href="../articles/c-line-charts.html">Creating a line chart</a>
+    <a class="dropdown-item" href="../articles/d-bar-charts.html">Create bar charts</a>
+    <a class="dropdown-item" href="../articles/e-other-charts.html">Create other type of charts</a>
+    <a class="dropdown-item" href="../articles/f-customize-legend.html">Cutsomize the legend</a>
   </div>
 </li>
       </ul>
@@ -70,22 +74,19 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sciensanogit.github.io/ggsano" class="external-link">ggsano</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"../R/sysdata.rda"</span><span class="op">)</span></code></pre></div>
 <div class="section level2">
 <h2 id="how-to-create-sciensano-style-graphics">How to create Sciensano style graphics<a class="anchor" aria-label="anchor" href="#how-to-create-sciensano-style-graphics"></a>
 </h2>
-<p>At the BBC data team, we have developed an R package and an R cookbook to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.</p>
+<p>At the R User Group of Sciensano, we have developed an R package and an R cookbook to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.</p>
 <p>The cookbook below should hopefully help anyone who wants to make graphics like these:</p>
 </div>
 <div class="section level2">
 <h2 id="load-all-the-libraries-you-need">Load all the libraries you need<a class="anchor" aria-label="anchor" href="#load-all-the-libraries-you-need"></a>
 </h2>
-<p>A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. So that you do not have to install and load them one by one, you can use the p_load function in the pacman package to load them all at once with the following code.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sciensanogit.github.io/ggsano" class="external-link">ggsano</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<p>A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sciensanogit.github.io/ggsano" class="external-link">ggsano</a></span><span class="op">)</span> <span class="co">## style</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co">## data management</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -94,34 +95,46 @@
 <span class="co">#&gt; The following objects are masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span> <span class="co">## data management</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span> <span class="co">## plot</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="how-does-the-bbplot-package-work">How does the bbplot package work?<a class="anchor" aria-label="anchor" href="#how-does-the-bbplot-package-work"></a>
+<h2 id="how-does-the-ggsano-package-work">How does the ggsano package work?<a class="anchor" aria-label="anchor" href="#how-does-the-ggsano-package-work"></a>
 </h2>
 <p>The package has two functions, <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> and <code><a href="../reference/finalise_plot.html">finalise_plot()</a></code>.</p>
 <p><code><a href="../reference/sciensano_style.html">sciensano_style()</a></code>: has no arguments and is added to the ggplot ‘chain’ after you have created a plot. What it does is generally makes text size, font and colour, axis lines, axis text, margins and many other standard chart components into Sciensano style, which has been formulated based on recommendations and feedback from the design team.</p>
 <p>Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> function, but need to be explicitly set in your other standard ggplot chart functions.</p>
-<p>The code below shows how the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the gapminder package.</p>
+<p>The code below shows how the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the Belgian burden of disease study (BeBOD).</p>
+<p>First, we need to read in the data:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dta</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"https://burden.sciensano.be/shiny/daly/session/33266afb66727f845fe25968b354f344/download/downloadData?w="</span><span class="op">)</span></code></pre></div>
+<p>Hereunder is an example graph:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Data for chart from gapminder package</span>
 <span class="va">line_df</span> <span class="op">&lt;-</span> <span class="va">dta</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">geo</span> <span class="op">==</span> <span class="st">"bel"</span><span class="op">)</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">CAUSE</span> <span class="op">==</span> <span class="st">"ALL CAUSES"</span> <span class="op">&amp;</span>
+           <span class="va">REGIOJ</span> <span class="op">==</span> <span class="st">"Belgium"</span> <span class="op">&amp;</span>
+           <span class="va">MEASURE</span> <span class="op">==</span> <span class="st">"Deaths"</span> <span class="op">&amp;</span>
+           <span class="va">METRIC</span> <span class="op">==</span> <span class="st">"Rate"</span> <span class="op">&amp;</span>
+           <span class="va">AGEGRP</span> <span class="op">==</span> <span class="st">"ALL"</span> <span class="op">&amp;</span>
+           <span class="va">SEX</span> <span class="op">==</span> <span class="st">"Both sexes"</span><span class="op">)</span>
+
+<span class="co">#Get Sciensano color</span>
+<span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pal_sciensano.html">pal_sciensano</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="co">#Make plot</span>
-<span class="va">line</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">line_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">life_expectancy_at_birth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#1380A1"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+<span class="va">line</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">line_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">YEAR</span>, y <span class="op">=</span> <span class="va">VAL_MEAN</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">col</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">1</span>, colour<span class="op">=</span><span class="st">"#333333"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/sciensano_style.html">sciensano_style</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Living longer"</span>,
-       subtitle <span class="op">=</span> <span class="st">"Life expectancy in Belgium 1952-2007"</span><span class="op">)</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Deaths"</span>,
+       subtitle <span class="op">=</span> <span class="st">"Number of deaths in Belgium 2004-2018"</span><span class="op">)</span>
 <span class="co">#&gt; Warning in sciensano_style(): Please specify an available font</span>
 <span class="co">#&gt; The first available font will be taken:</span>
 <span class="co">#&gt; Using font:</span></code></pre></div>
 <p><img src="a-create-graph_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p>You can modify these settings for your chart, or add additional theme arguments, by calling the theme function with the arguments you want - but please note that for it to work you must call it after you have called the <code>bbc_style</code> function. Otherwise <code>bbc_style()</code> will override it.</p>
-<p>This will add some gridlines, by adding extra theme arguments to what is included in the <code>bbc_style()</code> function. There are many similar examples throughout the cookbook.</p>
+<p>You can modify these settings for your chart, or add additional theme arguments, by calling the theme function with the arguments you want - but please note that for it to work you must call it after you have called the <code>sciensano_style</code> function. Otherwise <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> will override it.</p>
+<p>This will add some gridlines, by adding extra theme arguments to what is included in the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> function. There are many similar examples throughout the cookbook.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid.major.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"#cbcbcb"</span><span class="op">)</span>, 
         panel.grid.major.y<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -129,7 +142,7 @@
 <div class="section level2">
 <h2 id="save-out-your-finished-chart">Save out your finished chart<a class="anchor" aria-label="anchor" href="#save-out-your-finished-chart"></a>
 </h2>
-<p>After adding the <code>bbc_style()</code> to your chart there is one more step to get your plot ready for publication. <code><a href="../reference/finalise_plot.html">finalise_plot()</a></code>, the second function of the bbplot package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:</p>
+<p>After adding the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> to your chart there is one more step to get your plot ready for publication. <code><a href="../reference/finalise_plot.html">finalise_plot()</a></code>, the second function of the ggsano package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:</p>
 <p>Here are the function arguments: <code>finalise_plot(plot_name, source, save_filepath, width_pixels = 640, height_pixels = 450)</code></p>
 <ul>
 <li><p><code>plot_name</code>: the variable name that you have called your plot, for example for the chart example above <code>plot_name</code> would be <code>"line"</code>.</p></li>
@@ -139,14 +152,14 @@
 <li><p><code>height_pixels</code>: this is set to 450px by default, so only call this argument if you want the chart to have a different height, and specify what you want it to be.</p></li>
 <li><p><code>logo_image_path</code>: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.</p></li>
 </ul>
-<p>Example of how the <code><a href="../reference/finalise_plot.html">finalise_plot()</a></code> is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the <code>bbc_style()</code> to it:</p>
+<p>Example of how the <code><a href="../reference/finalise_plot.html">finalise_plot()</a></code> is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the <code><a href="../reference/sciensano_style.html">sciensano_style()</a></code> to it:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/finalise_plot.html">finalise_plot</a></span><span class="op">(</span>plot_name <span class="op">=</span> <span class="va">my_line_plot</span>,
               source <span class="op">=</span> <span class="st">"Source: Gapminder"</span>,
               save_filepath <span class="op">=</span> <span class="st">"filename_that_my_plot_should_be_saved_to.png"</span>,
               width_pixels <span class="op">=</span> <span class="fl">640</span>,
               height_pixels <span class="op">=</span> <span class="fl">450</span>,
-              logo_image_path <span class="op">=</span> <span class="st">"placeholder.png"</span><span class="op">)</span></code></pre></div>
+              logo_image_path <span class="op">=</span> <span class="st">"path_to_logo.png"</span><span class="op">)</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
