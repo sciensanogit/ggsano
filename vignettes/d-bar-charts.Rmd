@@ -1,0 +1,86 @@
+---
+title: "d-bar-charts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{d-bar-charts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(ggsano)
+library(ggsano) ## style
+library(dplyr) ## data management
+library(tidyr) ## data management
+library(ggplot2) ## plot
+library(readr) ## read data
+load("../R/sysdata.rda")
+```
+
+## Create a simple bar chart
+
+```{r}
+#Prepare data
+bar_df <- dta %>%
+  filter(time == 2007) %>%
+  arrange(desc(life_expectancy_at_birth)) %>%
+  head(5)
+
+#Get Sciensano color
+col <- pal_sciensano()(1)
+
+#Make plot
+bars <- ggplot(bar_df, aes(x = geo, y = life_expectancy_at_birth)) +
+  geom_bar(stat="identity", 
+           position="identity", 
+           fill=col) +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  sciensano_style() +
+  labs(title="Reunion is highest",
+       subtitle = "Highest life expectancy, 2007")
+```
+
+```{r, echo = FALSE}
+bars
+```
+
+## Make a grouped bar chart
+
+Making a grouped bar chart is very similar to making a bar chart.
+
+You just need to change `position = "identity"` to `position = "dodge"`, and set the `fill` aesthetically instead:
+
+```{r}
+#Prepare data
+grouped_bar_df <- dta %>%
+  filter(time == 1967 | time == 2007) %>%
+  spread(time, life_expectancy_at_birth) %>%
+  mutate(gap = `2007` - `1967`) %>%
+  arrange(desc(gap)) %>%
+  head(5) %>%
+  gather(key = time, 
+         value = life_expectancy_at_birth,
+         -geo,
+         -gap) 
+  
+#Make plot
+grouped_bars <- ggplot(grouped_bar_df, 
+                       aes(x = geo, 
+                           y = life_expectancy_at_birth, 
+                           fill = as.factor(time))) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  sciensano_style() +
+  scale_fill_sciensano() +
+  labs(title="We're living longer",
+       subtitle = "Biggest life expectancy rise, 1967-2007")
+```
+
+

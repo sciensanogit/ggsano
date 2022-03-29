@@ -57,6 +57,26 @@ devtools::load_all()
 devtools::check()
 
 ## UPDATE THE WEBSITE
+## create font example
+#Data for chart from gapminder package
+line_df <- dta %>%
+  filter(geo == "bel")
+
+#Make plot
+line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
+  geom_line(colour = "#1380A1", size = 1) +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  labs(title="Living longer",
+       subtitle = "Life expectancy in Belgium 1952-2007")
+
+pl1 <- line + sciensano_style(font = "Arial") + ggtitle("Arial")
+pl2 <- line + sciensano_style(font = "Papyrus") + ggtitle("Papyrus")
+pl3 <- line + sciensano_style(font = "Rockwell") + ggtitle("Rockwell")
+pl4 <- line + sciensano_style(font = "Times New Roman") + ggtitle("Times New Roman")
+
+cowplot::ggsave2(cowplot::plot_grid(pl1, pl2, pl3, pl4),
+                 filename = "vignettes/fonts.png",
+                 width = 12, height = 8)
 
 ## clean and build
 devtools::clean_vignettes()
@@ -67,3 +87,4 @@ pkgdown::build_site() ## update website
 ##                        Extra code ####
 ##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 usethis::use_package() ## include a package as dependency
+usethis::use_vignette() ## include a new vignette

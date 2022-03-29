@@ -14,37 +14,43 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo=FALSE}
 library(ggsano)
 load("../R/sysdata.rda")
 ```
 
 ## How to create Sciensano style graphics
 
-At the BBC data team, we have developed an R package and an R cookbook to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.
+At the R User Group of Sciensano, we have developed an R package and an R cookbook to make the process of creating publication-ready graphics in our in-house style using R’s ggplot2 library a more reproducible process, as well as making it easier for people new to R to create graphics.
 
 The cookbook below should hopefully help anyone who wants to make graphics like these:
 
 ## Load all the libraries you need
 
-A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. So that you do not have to install and load them one by one, you can use the p_load function in the pacman package to load them all at once with the following code.
+A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded.
 
 ```{r, warning=FALSE}
-library(ggsano)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(ggsano) ## style
+library(dplyr) ## data management
+library(tidyr) ## data management
+library(ggplot2) ## plot
+library(readr) ## read data
 ```
 
-## How does the bbplot package work?
+## How does the ggsano package work?
 The package has two functions, `sciensano_style()` and `finalise_plot()`.
 
 `sciensano_style()`: has no arguments and is added to the ggplot ‘chain’ after you have created a plot. What it does is generally makes text size, font and colour, axis lines, axis text, margins and many other standard chart components into Sciensano style, which has been formulated based on recommendations and feedback from the design team.
 
 Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `sciensano_style()` function, but need to be explicitly set in your other standard ggplot chart functions.
 
-The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from the gapminder package.
+The code below shows how the `sciensano_style()` should be used within standard chart-production workflow. This is an example for a very simple line chart, using data from gapminder.
 
+First, we need to read in the data:
+```r
+dta <- read_csv("https://raw.githubusercontent.com/open-numbers/ddf--gapminder--life_expectancy/master/ddf--datapoints--life_expectancy_at_birth--by--geo--time.csv")
+```
+Hereunder is an example graph:
 ```{r}
 #Data for chart from gapminder package
 line_df <- dta %>%
@@ -63,9 +69,9 @@ line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
 line
 ```
 
-You can modify these settings for your chart, or add additional theme arguments, by calling the theme function with the arguments you want - but please note that for it to work you must call it after you have called the `bbc_style` function. Otherwise `bbc_style()` will override it.
+You can modify these settings for your chart, or add additional theme arguments, by calling the theme function with the arguments you want - but please note that for it to work you must call it after you have called the `sciensano_style` function. Otherwise `sciensano_style()` will override it.
 
-This will add some gridlines, by adding extra theme arguments to what is included in the `bbc_style()` function. There are many similar examples throughout the cookbook.
+This will add some gridlines, by adding extra theme arguments to what is included in the `sciensano_style()` function. There are many similar examples throughout the cookbook.
 
 ```r
 theme(panel.grid.major.x = element_line(color="#cbcbcb"), 
@@ -74,7 +80,7 @@ theme(panel.grid.major.x = element_line(color="#cbcbcb"),
 
 ## Save out your finished chart
 
-After adding the `bbc_style()` to your chart there is one more step to get your plot ready for publication. `finalise_plot()`, the second function of the bbplot package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:
+After adding the `sciensano_style()` to your chart there is one more step to get your plot ready for publication. `finalise_plot()`, the second function of the ggsano package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:
 
 Here are the function arguments: `finalise_plot(plot_name, source, save_filepath, width_pixels = 640, height_pixels = 450)`
 
@@ -90,7 +96,7 @@ Here are the function arguments: `finalise_plot(plot_name, source, save_filepath
 
 * `logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
 
-Example of how the `finalise_plot()` is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the `bbc_style()` to it:
+Example of how the `finalise_plot()` is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the `sciensano_style()` to it:
 
 ```r
 finalise_plot(plot_name = my_line_plot,
@@ -98,7 +104,7 @@ finalise_plot(plot_name = my_line_plot,
               save_filepath = "filename_that_my_plot_should_be_saved_to.png",
               width_pixels = 640,
               height_pixels = 450,
-              logo_image_path = "placeholder.png")
+              logo_image_path = "path_to_logo.png")
 ```
 
 
