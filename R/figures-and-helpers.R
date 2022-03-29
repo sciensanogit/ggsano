@@ -13,10 +13,12 @@
 #' geom_hline(yintercept = 75, size = 1, colour="#3AAA35") +
 #' sciensano_style()}
 
-sciensano_style <- function(font = "System Font") {
+sciensano_style <- function(font = "Arial") {
 
   if (!(font %in% extrafont::fonts())) {
-    stop("Please specify an available font")
+    warning("Please specify an available font\nThe first available font will be taken:")
+    message(paste0("Using font: ", extrafont::fonts()[1]))
+    font <- extrafont::fonts()[1]
   }
 
   ## build on theme_bw

@@ -4,7 +4,7 @@
 \alias{sciensano_style}
 \title{Add sciensano theme to ggplot chart}
 \usage{
-sciensano_style(font = "System Font")
+sciensano_style(font = "Arial")
 }
 \arguments{
 \item{font}{Specify one of the available fonts (Default: Arial)}

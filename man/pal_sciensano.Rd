@@ -12,9 +12,9 @@ pal_sciensano(
 }
 \arguments{
 \item{palette}{Palette type.
-Currently there are two available option:
+Currently there are four available general options:
 \code{"default", "contrast", "GnRd", "PuBl"} containing all or a subset of the palette
-(14-color palette inspired by \emph{Sciensano}).}
+(The default package is a 14-color palette inspired by \emph{Sciensano}).}
 
 \item{alpha}{Transparency level, a real number in (0, 1].
 See \code{alpha} in \code{\link[grDevices]{rgb}} for details.}
@@ -22,10 +22,10 @@ See \code{alpha} in \code{\link[grDevices]{rgb}} for details.}
 \item{reverse}{Logical. Should the order of the colors be reversed?}
 }
 \description{
-Color palettes inspired by housestyle of Sciensano \url{https://intranet.sciensano.be/nl/DienstenAlgemeenDirecteur/Communicatie/Pages/Huisstijl-en-templates.aspx}.
+Color palettes inspired by the housestyle of Sciensano \url{https://intranet.sciensano.be/nl/DienstenAlgemeenDirecteur/Communicatie/Pages/Huisstijl-en-templates.aspx}.
 }
 \examples{
 \dontrun{library("scales")
-show_col(pal_sciensano("default")(10))
-show_col(pal_sciensano("default", alpha = 0.6)(10))}
+show_col(pal_sciensano("default")(14))
+show_col(pal_sciensano("default", alpha = 0.6)(14))}
 }

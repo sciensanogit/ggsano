@@ -30,5 +30,4 @@ Depends:
 URL: https://sciensanogit.github.io/ggsano
 Suggests: 
     rmarkdown,
-    knitr,
-    pacman
+    knitr

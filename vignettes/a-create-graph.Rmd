@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(ggsano)
+load("../R/sysdata.rda")
 ```
 
 ## How to create Sciensano style graphics
@@ -28,8 +29,8 @@ The cookbook below should hopefully help anyone who wants to make graphics like 
 
 A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. So that you do not have to install and load them one by one, you can use the p_load function in the pacman package to load them all at once with the following code.
 
-```{r}
-library(gapminder)
+```{r, warning=FALSE}
+library(ggsano)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -46,11 +47,11 @@ The code below shows how the `sciensano_style()` should be used within standard 
 
 ```{r}
 #Data for chart from gapminder package
-line_df <- gapminder %>%
-  filter(country == "Belgium") 
+line_df <- dta %>%
+  filter(geo == "bel") 
 
 #Make plot
-line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
+line <- ggplot(line_df, aes(x = time, y = life_expectancy_at_birth)) +
   geom_line(colour = "#1380A1", size = 1) +
   geom_hline(yintercept = 0, size = 1, colour="#333333") +
   sciensano_style() +
@@ -61,4 +62,43 @@ line <- ggplot(line_df, aes(x = year, y = lifeExp)) +
 ```{r, echo = FALSE}
 line
 ```
+
+You can modify these settings for your chart, or add additional theme arguments, by calling the theme function with the arguments you want - but please note that for it to work you must call it after you have called the `bbc_style` function. Otherwise `bbc_style()` will override it.
+
+This will add some gridlines, by adding extra theme arguments to what is included in the `bbc_style()` function. There are many similar examples throughout the cookbook.
+
+```r
+theme(panel.grid.major.x = element_line(color="#cbcbcb"), 
+        panel.grid.major.y=element_blank())
+```
+
+## Save out your finished chart
+
+After adding the `bbc_style()` to your chart there is one more step to get your plot ready for publication. `finalise_plot()`, the second function of the bbplot package, will left-align the title, subtitle and add the footer with a source and an image in the bottom right corner of your plot. It will also save it to your specified location. The function has five arguments:
+
+Here are the function arguments: `finalise_plot(plot_name, source, save_filepath, width_pixels = 640, height_pixels = 450)`
+
+* `plot_name`: the variable name that you have called your plot, for example for the chart example above `plot_name` would be `"line"`.
+
+* `source`: the source text that you want to appear at the bottom left corner of your plot. You will need to type the word `"Source:"` before it, so for example `source = "Source: ONS"` would be the right way to do that.
+
+* `save_filepath`: the precise filepath that you want your graphic to save to, including the `.png` extension at the end. This does depend on your working directory and if you are in a specific R project. An example filepath would be: `Desktop/R_projects/charts/line_chart.png`.
+
+* `width_pixels`: this is set to 640px by default, so only call this argument if you want the chart to have a different width, and specify what you want it to be.
+
+* `height_pixels`: this is set to 450px by default, so only call this argument if you want the chart to have a different height, and specify what you want it to be.
+
+* `logo_image_path`: this argument specifies the path for the image/logo in the bottom right corner of the plot. The default is for a placeholder PNG file with a background that matches the background colour of the plot, so do not specify the argument if you want it to appear without a logo. If you want to add your own logo, just specify the path to your PNG file. The package has been prepared with a wide and thin image in mind.
+
+Example of how the `finalise_plot()` is used in a standard workflow. This function is called once you have created and finalised your chart data, titles and added the `bbc_style()` to it:
+
+```r
+finalise_plot(plot_name = my_line_plot,
+              source = "Source: Gapminder",
+              save_filepath = "filename_that_my_plot_should_be_saved_to.png",
+              width_pixels = 640,
+              height_pixels = 450,
+              logo_image_path = "placeholder.png")
+```
+
 

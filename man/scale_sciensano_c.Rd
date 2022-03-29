@@ -4,7 +4,7 @@
 \alias{scale_color_sciensano_c}
 \alias{scale_colour_sciensano_c}
 \alias{scale_fill_sciensano_c}
-\title{Sciensano Continuous Color Palettes}
+\title{Sciensano Continuous Color Scales}
 \usage{
 scale_color_sciensano_c(
   palette = c("red", "green", "red-yellow-green"),

@@ -1,11 +1,11 @@
 #' Sciensano Discrete Color Palettes
 #'
-#' Color palettes inspired by housestyle of Sciensano \url{https://intranet.sciensano.be/nl/DienstenAlgemeenDirecteur/Communicatie/Pages/Huisstijl-en-templates.aspx}.
+#' Color palettes inspired by the housestyle of Sciensano \url{https://intranet.sciensano.be/nl/DienstenAlgemeenDirecteur/Communicatie/Pages/Huisstijl-en-templates.aspx}.
 #'
 #' @param palette Palette type.
-#' Currently there are two available option:
+#' Currently there are four available general options:
 #' \code{"default", "contrast", "GnRd", "PuBl"} containing all or a subset of the palette
-#' (14-color palette inspired by \emph{Sciensano}).
+#' (The default package is a 14-color palette inspired by \emph{Sciensano}).
 #' @param alpha Transparency level, a real number in (0, 1].
 #' See \code{alpha} in \code{\link[grDevices]{rgb}} for details.
 #' @param reverse Logical. Should the order of the colors be reversed?
@@ -17,10 +17,14 @@
 #'
 #' @examples
 #' \dontrun{library("scales")
-#' show_col(pal_sciensano("default")(10))
-#' show_col(pal_sciensano("default", alpha = 0.6)(10))}
-pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
+#' show_col(pal_sciensano("default")(14))
+#' show_col(pal_sciensano("default", alpha = 0.6)(14))}
+pal_sciensano <- function(palette = c("default", "contrast",
+                                      "GnRd", "PuBl",
+                                      ## HSR specific colors
+                                      "region"),
                           alpha = 1, reverse = FALSE) {
+
   palette <- match.arg(palette)
   if (alpha > 1L | alpha <= 0L) stop("alpha must be in (0, 1]")
 
@@ -37,7 +41,7 @@ pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "re
   scales::manual_pal(unname(alpha_cols))
 }
 
-#' Sciensano Color Color Scales
+#' Sciensano Discrete Color/Colour Scales
 #'
 #' See \code{\link{pal_sciensano}} for details.
 #'
@@ -68,8 +72,10 @@ pal_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "re
 #' ) +
 #'   geom_histogram(colour = "black", binwidth = 1, position = "dodge") +
 #'   theme_bw() + scale_fill_sciensano()}
-
-scale_color_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
+scale_color_sciensano <- function(palette = c("default", "contrast",
+                                              "GnRd", "PuBl",
+                                              ## HSR specific colors
+                                              "region"),
                                   alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
   discrete_scale("colour", "sciensano", pal_sciensano(palette, alpha, reverse), ...)
@@ -82,7 +88,10 @@ scale_colour_sciensano <- scale_color_sciensano
 #' @export scale_fill_sciensano
 #' @importFrom ggplot2 discrete_scale
 #' @rdname scale_sciensano
-scale_fill_sciensano <- function(palette = c("default", "contrast", "GnRd", "PuBl", "region"),
+scale_fill_sciensano <- function(palette = c("default", "contrast",
+                                             "GnRd", "PuBl",
+                                             ## HSR specific colors
+                                             "region"),
                                  alpha = 1, reverse = FALSE, ...) {
   palette <- match.arg(palette)
   discrete_scale("fill", "sciensano", pal_sciensano(palette, alpha, reverse), ...)
@@ -152,7 +161,7 @@ pal_sciensano_c <- function(
   manual_pal(unname(alpha_cols))
 }
 
-#' Sciensano Continuous Color Palettes
+#' Sciensano Continuous Color Scales
 #'
 #' See \code{\link{pal_sciensano_c}} for details.
 #'

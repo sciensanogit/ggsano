@@ -1,5 +1,5 @@
 ---
-title: "a-add-fond"
+title: "Add custom fonts to parse to the plot"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{a-add-fond}

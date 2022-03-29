@@ -4,7 +4,7 @@
 \alias{scale_color_sciensano}
 \alias{scale_colour_sciensano}
 \alias{scale_fill_sciensano}
-\title{Sciensano Color Color Scales}
+\title{Sciensano Discrete Color/Colour Scales}
 \usage{
 scale_color_sciensano(
   palette = c("default", "contrast", "GnRd", "PuBl", "region"),
@@ -29,9 +29,9 @@ scale_fill_sciensano(
 }
 \arguments{
 \item{palette}{Palette type.
-Currently there are two available option:
+Currently there are four available general options:
 \code{"default", "contrast", "GnRd", "PuBl"} containing all or a subset of the palette
-(14-color palette inspired by \emph{Sciensano}).}
+(The default package is a 14-color palette inspired by \emph{Sciensano}).}
 
 \item{alpha}{Transparency level, a real number in (0, 1].
 See \code{alpha} in \code{\link[grDevices]{rgb}} for details.}
